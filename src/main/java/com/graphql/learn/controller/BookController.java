@@ -40,7 +40,7 @@ public class BookController {
     }
 
     @MutationMapping("updateBook")
-    public Book update(@RequestBody UpdateBook book, @PathVariable Long id) {
+    public Book update(@Argument UpdateBook book, @Argument("bookId") Long id) {
         Book book1 = bookRepository.findById(id).orElseThrow(()-> new RuntimeException("Not valid Id"));
         book1.setTitle(book.getTitle());
         book1.setAuthor(book.getAuthor());
@@ -50,7 +50,8 @@ public class BookController {
         return bookService.update(book1, id);
     }
 
-    public String delete(@PathVariable Long id) {
+    @MutationMapping("deleteBook")
+    public String delete(@Argument("bookId") Long id) {
         return bookService.delete(id);
     }
 

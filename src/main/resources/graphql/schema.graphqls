@@ -1,18 +1,25 @@
-
+#mutation is used to post, put, patch, delete
 type Mutation{
-    createBook(book:BookInput):Book
-    updateBook(book:UpdateBook):Book
+    createBook(book:BookInput):Book  #where book is the parameter to be taken and BookInput is the dto request to be taken and
+    #Book is the response that will be provided to the client/frontend
+    updateBook(book:UpdateBook, bookId:Int):Book
+    deleteBook(bookId:Int):String
+    addCollege(request:AddCollegeRequest):CollegeResponse
+    updateCollege(request:AddCollegeRequest, collegeId:Int):CollegeResponse
+    deleteCollege(collegeId:Int):String
 }
 
 
+#query is used for get requests
 type Query{
     allBooks:[Book]
     getBook(bookId:Int):Book
+    allCollege:[CollegeResponse]
+    getCollegeById(collegeId:Int):CollegeResponse
 }
 
-
+# Book --> here is used as the response to be provided to client/frontend
 type Book{
-
     id:ID!
     title:String
     description:String
@@ -21,7 +28,14 @@ type Book{
     pages:Int
 }
 
+type CollegeResponse{
+    id:ID
+    collegeName:String
+    location:String
+    fee:String
+}
 
+#BookInput is used here as the RequestDto to take request from users
 input BookInput{
     title:String
     description:String
@@ -30,6 +44,7 @@ input BookInput{
     pages:Int
 }
 
+#UpdateBook is used as the RequestDto to take request from user for update request
 input UpdateBook{
     title:String
     description:String
@@ -37,3 +52,10 @@ input UpdateBook{
     price:Float
     pages:Int
 }
+
+input AddCollegeRequest{
+    collegeName:String
+    location:String
+    fee:String
+}
+
