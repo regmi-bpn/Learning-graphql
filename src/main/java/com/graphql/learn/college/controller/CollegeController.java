@@ -44,7 +44,7 @@ public class CollegeController {
     }
 
     @QueryMapping
-    public CollegeResponse getCollegeById(Long id) {
+    public CollegeResponse getCollegeById(@Argument("collegeId")Long id) {
         return collegeService.getCollegeById(id);
     }
 
